@@ -1,0 +1,51 @@
+rm *.log
+
+cd experiment_0
+rm *.log
+rm *.png
+cd ..
+
+cd experiment_1
+rm *.log
+rm *.png
+cd ..
+
+cd experiment_2
+rm *.log
+rm *.png
+cd ..
+
+cd experiment_3
+rm *.log
+rm *.png
+cd ..
+
+cd experiment_4
+rm *.log
+rm *.png
+cd ..
+
+cd experiment_5
+rm *.log
+rm *.png
+cd ..
+
+cd experiment_6
+rm *.log
+rm *.png
+cd ..
+
+cd experiment_7
+rm *.log
+rm *.png
+cd ..
+
+cd experiment_8
+rm *.log
+rm *.png
+cd ..
+
+cd experiment_9
+rm *.log
+rm *.png
+cd ..

@@ -8,6 +8,8 @@ export LIBS_RL_PATH
 
 
 all:
+	cd dqn_test && make -j4
+
 	cd 01_classification_cpp && make -j4
 	cd 02_classification_mnist_cpp && make -j4
 	cd 03_regression_cpp && make -j4
@@ -22,6 +24,8 @@ all:
 	cd 10_stack_cpp && make -j4
 
 clean:
+	cd dqn_test && make clean
+
 	cd 01_classification_cpp && make clean
 	cd 02_classification_mnist_cpp && make clean
 	cd 03_regression_cpp && make clean

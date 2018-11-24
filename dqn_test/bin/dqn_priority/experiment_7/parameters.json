@@ -1,0 +1,9 @@
+{
+  "log_file_name_prefix": "dqn_priority/experiment_7/",
+
+  "training_iterations" : 200000,
+  "testing_iterations"  : 10000,
+
+  "run_visual"          : false,
+  "visual_iterations"   : 1000
+}
