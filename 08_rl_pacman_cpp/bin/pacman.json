@@ -1,0 +1,67 @@
+{
+  "sprites"   : [
+    {
+      "name"          : "empty",
+      "id"            : 0,
+      "scale"         : 1.0,
+      "solid"         : false,
+      "color"         : [0.0, 0.0, 0.0]
+    },
+
+    {
+      "name"          : "wall",
+      "id"            : 1,
+      "scale"         : 1.0,
+      "solid"         : true,
+      "texture_file"  : "textures/wall.png",
+      "color"         : [0.0, 0.0, 0.7]
+    },
+
+    {
+      "name"          : "food",
+      "id"            : 2,
+      "scale"         : 0.25,
+      "solid"         : false,
+      "texture_file"  : "textures/food.png",
+      "color"         : [0.8, 0.6, 0.0]
+    },
+
+    {
+      "name"          : "player",
+      "id"            : 3,
+      "scale"         : 1.0,
+      "solid"         : false,
+      "texture_file"  : "textures/player.png",
+      "color"         : [1.0, 1.0, 0.0]
+    },
+
+    {
+      "name"          : "enemy",
+      "id"            : 4,
+      "scale"         : 1.0,
+      "solid"         : false,
+      "texture_file"  : "textures/enemy.png",
+      "color"         : [0.8, 0.0, 0.0]
+    }
+  ],
+
+  "player_position" : [[5, 7]],
+  "enemy_position"  : [[4, 5], [6, 5]],
+
+  "eat_reward"      : 0.1,
+  "capture_reward"  : -1.0,
+
+  "grid" : [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1],
+    [1, 2, 1, 1, 2, 1, 2, 1, 1, 2, 1],
+    [1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1],
+    [1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1],
+    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+    [1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1],
+    [1, 2, 1, 2, 2, 0, 2, 2, 1, 2, 1],
+    [1, 2, 1, 1, 2, 1, 2, 1, 1, 2, 1],
+    [1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ]
+}

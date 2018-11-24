@@ -1,11 +1,11 @@
 import sys
 path = "/home/michal/"
-sys.path.insert(0, path + "libs/rysy/libs_rysy_python/")
-import rysy
+sys.path.insert(0, path + "libs/rl/libs_rl_python/")
+import pyrl
 
-dataset = rysy.DatasetTicTacToe("tic_tac_toe.data", 0.5, 2)
+dataset = pyrl.DatasetTicTacToe("tic_tac_toe.data", 0.5, 2)
 
-experiment = rysy.RegressionExperiment(dataset, "experiment_0/")
+experiment = pyrl.RegressionExperiment(dataset, "experiment_0/")
 
 experiment.run()
 

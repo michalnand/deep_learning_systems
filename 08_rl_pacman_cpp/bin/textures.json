@@ -1,0 +1,28 @@
+{
+  "textures"   : [
+    {
+      "id"            : 0,
+      "file_name"  : "textures/empty.png"
+    },
+
+    {
+      "id"            : 1,
+      "file_name"  : "textures/wall.png"
+    },
+
+    {
+      "id"            : 2,
+      "file_name"  : "textures/food.png"
+    },
+
+    {
+      "id"            : 3,
+      "file_name"  : "textures/pacman.png"
+    },
+
+    { 
+      "id"            : 4,
+      "file_name"  : "textures/enemy.png"
+    }
+  ]
+}

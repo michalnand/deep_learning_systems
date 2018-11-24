@@ -1,0 +1,44 @@
+{
+  "q_batch_size"        : 256,
+
+  "alpha"               : 1.0,
+  "gamma"               : 0.9,
+  "epsilon"             : 0.2,
+
+
+  "network_architecture":
+  {
+        "network_log_file_name" : "agent_0/network.log",
+
+        "input_geometry"     : [16, 16, 1],
+        "output_geometry"    : [1, 1, 5],
+
+        "hyperparameters" :
+        {
+          "init_weight_range" : 0.0,
+          "learning_rate"     : 0.001,
+          "lambda1"           : 0.0,
+          "lambda2"           : 0.0,
+          "dropout"           : 0.2,
+          "noise"             : 0.05,
+
+          "minibatch_size"    : 32
+        },
+
+        "layers"         :
+        [
+          {
+            "type"      : "fc",
+            "geometry"  : [1, 1, 256]
+          },
+          {
+            "type"      : "relu"
+          },
+
+          {
+            "type"      : "output"
+          }
+
+        ]
+  }
+}
