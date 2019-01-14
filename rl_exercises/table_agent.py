@@ -1,7 +1,4 @@
-import sys
-sys.path.insert(0, '../python')
 import pyrl
-
 import numpy
 
 class QLearningAgent(pyrl.Agent):
@@ -60,7 +57,7 @@ class QLearningAgent(pyrl.Agent):
 
         max_idx = numpy.argmax(self.q_table[self.state])
         d = reward + gamma*self.q_table[self.state][max_idx] - self.q_table[self.state_prev][self.action_prev]
-        
+
         self.q_table[self.state_prev][self.action_prev]+= alpha*d
 
         self.env.action(self.action)

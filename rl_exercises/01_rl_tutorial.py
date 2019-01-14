@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, "/home/michal/libs/rl/libs_rl_python/")
-import pyrl
 
+import pyrl
 import numpy
 import table_agent
 
