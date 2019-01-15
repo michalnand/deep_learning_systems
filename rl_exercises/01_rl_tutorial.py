@@ -4,6 +4,7 @@ sys.path.insert(0, "/home/michal/libs/rl/libs_rl_python/")
 import pyrl
 import numpy
 import table_agent
+import dummy_agent
 
 training_iterations  = 1000000
 testing_iterations   = 1000
