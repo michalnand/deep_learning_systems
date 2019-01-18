@@ -3,8 +3,8 @@ sys.path.insert(0, "/home/michal/libs/rl/libs_rl_python/")
 
 import pyrl
 import numpy
-import table_agent
-import dummy_agent
+import lib.agent_table
+
 
 training_iterations  = 1000000
 testing_iterations   = 1000
@@ -19,8 +19,8 @@ hyperparameters.epsilon        = 0.3
 hyperparameters.epsilon_best   = 0.01
 
 
-agent = table_agent.SarsaAgent(env, hyperparameters)
-#agent = table_agent.QLearningAgent(env, hyperparameters)
+agent = lib.agent_table.SarsaAgent(env, hyperparameters)
+#agent = lib.agent_table.QLearningAgent(env, hyperparameters)
 
 
 for i in range(0, training_iterations):

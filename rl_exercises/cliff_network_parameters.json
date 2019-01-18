@@ -1,0 +1,39 @@
+{
+  "experience_buffer_size"        : 256,
+
+  "gamma"               : 0.9,
+  "epsilon"             : 0.2,
+  "epsilon_best"        : 0.01,
+
+
+  "network_architecture":
+  {
+        "network_log_file_name" : "cliff_network.log",
+
+        "input_geometry"     : [8, 8, 1],
+        "output_geometry"    : [1, 1, 4],
+
+        "hyperparameters" :
+        {
+          "init_weight_range" : 0.0,
+          "learning_rate"     : 0.005,
+          "lambda1"           : 0.000001,
+          "lambda2"           : 0.000001,
+          "dropout"           : 0.2,
+
+          "minibatch_size"    : 32
+        },
+
+        "layers"         :
+        [
+
+
+
+
+            {
+                "type"      : "output"
+            }
+
+        ]
+  }
+}
