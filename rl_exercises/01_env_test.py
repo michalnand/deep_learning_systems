@@ -1,15 +1,15 @@
-import lib.env_cliff
-import lib.agent
+import lib_env.env_cliff
+import lib_agent.agent
 
 #init cliff environment
-env = lib.env_cliff.EnvCliff()
+env = lib_env.env_cliff.EnvCliff()
 
 #print environment info
 env.print_info()
 
 
 #init dummy agent - doing only random actions
-agent = lib.agent.Agent(env)
+agent = lib_agent.agent.Agent(env)
 
 #simulate training
 training_iterations = 10000

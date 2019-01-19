@@ -1,8 +1,8 @@
-import lib.env_cliff
-import lib.agent_table
+import lib_env.env_cliff
+import lib_agent.agent_table
 
 #init cliff environment
-env = lib.env_cliff.EnvCliff()
+env = lib_env.env_cliff.EnvCliff()
 
 #print environment info
 env.print_info()
@@ -12,7 +12,7 @@ env.print_info()
 #agent = lib.agent_table.SarsaAgent(env)
 
 #init Q Learning agent
-agent = lib.agent_table.QLearningAgent(env)
+agent = lib_agent.agent_table.QLearningAgent(env)
 
 
 #simulate training
