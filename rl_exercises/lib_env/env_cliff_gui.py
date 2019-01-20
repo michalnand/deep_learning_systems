@@ -16,9 +16,6 @@ class EnvCliffGui(lib_env.env_cliff.EnvCliff):
     def render(self):
 
         self.gui.start()
-        self.gui.translate(0.0, 0.0, -3.0)
-
-
 
         for y in range(0, self.height):
             for x in range(0, self.width):

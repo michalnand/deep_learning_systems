@@ -28,6 +28,11 @@
     {
       "id"            : 5,
       "file_name"  : "gui/textures/pong.png"
-    }
+    },
+
+      {
+        "id"            : 6,
+        "file_name"  : "gui/textures/car.png"
+      }
   ]
 }

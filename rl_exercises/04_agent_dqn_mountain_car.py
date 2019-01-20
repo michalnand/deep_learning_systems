@@ -1,16 +1,18 @@
-import lib_env.env_cliff_gui
+import lib_env.env_mountain_car
 import lib_agent.agent_dqn
+import lib_agent.agent
 
 #init cliff environment
-env = lib_env.env_cliff_gui.EnvCliffGui()
+env = lib_env.env_mountain_car.EnvMountainCar()
 
 #print environment info
 env.print_info()
 
-#init sarsa agent
-agent = lib_agent.agent_dqn.DQNAgent(env, "networks/cliff_network_parameters.json")
 
-#simulate training
+#init DQN agent
+agent = lib_agent.agent_dqn.DQNAgent(env, "networks/mountain_car_network_parameters.json")
+
+#process training
 training_iterations = 100000
 
 for iteration in range(0, training_iterations):

@@ -100,6 +100,8 @@ void GLVisualisation::start()
   glMatrixMode(GL_MODELVIEW);
 
   glClearColor(0.0, 0.0, 0.0, 0.0);
+
+  translate(0.0, 0.0, -3.0);
 }
 
 void GLVisualisation::finish()

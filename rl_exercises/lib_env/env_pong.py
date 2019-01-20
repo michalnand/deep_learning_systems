@@ -31,12 +31,9 @@ class EnvPong(lib_env.env.Env):
 
         self.gui = gl_gui.GLVisualisation()
 
-        width  = 30*self.width
-        height = 30*self.height
 
-        self.size_ratio = width/height
+        self.size_ratio = self.width/self.height
 
-        self.gui.init("pong", width, height)
 
 
     def reset(self):
@@ -67,13 +64,14 @@ class EnvPong(lib_env.env.Env):
         self.render()
 
     def render(self):
+        self.gui.init("pong", 32*self.width, 32*self.height)
+
         if self.width > self.height:
             element_size = 2.0/self.width
         else:
             element_size = 2.0/self.height
 
         self.gui.start()
-        self.gui.translate(0.0, 0.0, -3.0)
 
         for y in range(0, self.height):
             self.gui.push()
@@ -104,7 +102,7 @@ class EnvPong(lib_env.env.Env):
 
         self.gui.finish()
 
-        time.sleep(0.1)
+        time.sleep(0.05)
 
     def do_action(self, action):
         self.reward = 0.0

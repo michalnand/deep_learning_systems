@@ -35,12 +35,8 @@ class EnvArkanoid(lib_env.env.Env):
 
         self.gui = gl_gui.GLVisualisation()
 
-        width  = 32*self.width
-        height = 32*self.height
+        self.size_ratio = self.width/self.height
 
-        self.size_ratio = width/height
-
-        self.gui.init("arkanoid", width, height)
 
 
     def reset(self):
@@ -80,8 +76,9 @@ class EnvArkanoid(lib_env.env.Env):
         self.render()
 
     def render(self):
+        self.gui.init("arkanoid", 32*self.width, 32*self.height)
+
         self.gui.start()
-        self.gui.translate(0.0, 0.0, -3.0)
 
         if self.height > self.width:
             element_size = 1.9/self.height

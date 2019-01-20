@@ -11,7 +11,7 @@ env.print_info()
 #init dummy agent - doing only random actions
 agent = lib_agent.agent.Agent(env)
 
-#simulate training
+#simulate training -> random moves only
 training_iterations = 10000
 
 for iteration in range(0, training_iterations):

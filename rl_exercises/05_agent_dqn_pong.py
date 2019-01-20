@@ -9,9 +9,9 @@ env.print_info()
 
 
 #init DQN agent
-agent = lib_agent.agent_dqn.DQNAgent(env, "networks/pong_network_parameters_a.json")
+agent = lib_agent.agent_dqn.DQNAgent(env, "networks/pong_network_parameters_c.json")
 
-#simulate training
+#process training
 training_iterations = 100000
 
 for iteration in range(0, training_iterations):

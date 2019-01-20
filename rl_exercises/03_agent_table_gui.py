@@ -15,7 +15,7 @@ env.print_info()
 agent = lib_agent.agent_table.QLearningAgent(env)
 
 
-#simulate training
+#process training
 training_iterations = 10000
 
 for iteration in range(0, training_iterations):
