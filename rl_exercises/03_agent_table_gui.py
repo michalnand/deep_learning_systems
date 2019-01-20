@@ -1,3 +1,7 @@
+#table agent example with opengl GUI
+#learn avoid the cliff
+#try to compare Q-learning and SARSA trajectory results
+
 import lib_env.env_cliff_gui
 import lib_agent.agent_table
 
@@ -7,13 +11,11 @@ env = lib_env.env_cliff_gui.EnvCliffGui()
 #print environment info
 env.print_info()
 
-
-#init sarsa agent
-#agent = lib_agent.agent_table.SarsaAgent(env)
-
 #init Q Learning agent
 agent = lib_agent.agent_table.QLearningAgent(env)
 
+#init sarsa agent
+#agent = lib_agent.agent_table.SarsaAgent(env)
 
 #process training
 training_iterations = 10000
@@ -31,9 +33,9 @@ env.reset_score()
 agent.run_best_enable()
 
 
-#process testing iterations
-#testing_iterations = 2000
-#for iteration in range(0, testing_iterations):
+#process testing iterations or infinite loop
+
+#for iteration in range(0, 2000):
 while True:
     agent.main()
 

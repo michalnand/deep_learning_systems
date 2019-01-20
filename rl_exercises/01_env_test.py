@@ -1,3 +1,6 @@
+#this is basic environment test
+#create example environment and agent playing random strategy
+
 import lib_env.env_cliff
 import lib_agent.agent
 
@@ -6,7 +9,6 @@ env = lib_env.env_cliff.EnvCliff()
 
 #print environment info
 env.print_info()
-
 
 #init dummy agent - doing only random actions
 agent = lib_agent.agent.Agent(env)
@@ -30,9 +32,11 @@ agent.run_best_enable()
 #process testing iterations
 testing_iterations = 1000
 for iteration in range(0, testing_iterations):
+    #process agent
     agent.main()
 
-env.render()
+    #draw
+    env.render()
 
 print("program done")
 print("move=", env.get_move(), " score=",env.get_score())

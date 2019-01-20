@@ -1,3 +1,8 @@
+#agent interface class
+#each next agent should inheritt this interface
+#this class implments basic dummy agent selecting random actions
+#into constructor just put environment (or environment interface)
+
 import lib_env.env
 import numpy
 import random
@@ -14,7 +19,7 @@ class Agent():
         self.env.do_action(action)
 
 
-    #this methods controll if agent is choosing random actions or best action only
+    #this methods controlls if agent is choosing random actions or best action only
     #during training call run_best_disable(), during testing run_best_disable()
     #inheritted agent can test this variable, and set strategy, reading is_run_best_enabled()
     def run_best_enable(self):
@@ -39,6 +44,8 @@ class Agent():
 
         return action
 
+    #return index where is the maximal value of vector v
+    #nice to have, generaly works with lists, c++ vectors or numpy arrays
     def __argmax(self, v):
         res = 0
         for i in range(0, len(v)):

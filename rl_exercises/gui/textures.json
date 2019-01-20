@@ -1,5 +1,5 @@
 {
-  "textures"   : [
+    "textures"   : [
     {
       "id"            : 0,
       "file_name"  : "gui/textures/empty.png"
@@ -30,9 +30,30 @@
       "file_name"  : "gui/textures/pong.png"
     },
 
-      {
+    {
         "id"            : 6,
         "file_name"  : "gui/textures/car.png"
-      }
+    },
+
+    {
+        "id"            : 7,
+        "file_name"  : "gui/textures/wood.png"
+    },
+    {
+        "id"            : 8,
+        "file_name"  : "gui/textures/brick.png"
+    },
+    {
+        "id"            : 9,
+        "file_name"  : "gui/textures/wool.png"
+    },
+    {
+        "id"            : 10,
+        "file_name"  : "gui/textures/ore.png"
+    },
+    {
+        "id"            : 11,
+        "file_name"  : "gui/textures/rye.png"
+    }
   ]
 }

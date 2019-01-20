@@ -1,3 +1,13 @@
+#Q-learning and SARSA agents coded from scratch
+#table is used to store Q values
+#state vector is converted to table index into table as idx = argmax(state)
+
+#parameters
+#gamma - RL discount factor
+#alpha - learning rate
+#epsilon_training - probability of choosing random action during training
+#epsilon_testing  - probability of choosing random action during testing
+
 import lib_agent.agent
 import numpy
 
@@ -37,25 +47,31 @@ class QLearningAgent(lib_agent.agent.Agent):
 
     def main(self):
 
+        #choose epsilon - depends on training or testing mode
         if self.is_run_best_enabled():
             epsilon = self.epsilon_testing
         else:
             epsilon = self.epsilon_training
 
+        #QLearning needs to remember current state + action and previous state + action
         self.state_prev = self.state
         self.state      = self.env.get_observation().argmax()
 
         self.action_prev    = self.action
+        #select action is done by probality selection using epsilon
         self.action         = self.select_action(self.q_table[self.state], epsilon)
 
+        #obtain reward from environment
         reward = self.env.get_reward()
 
+        #process Q learning
         q_tmp = self.q_table[self.state].max()
 
         d = reward + self.gamma*q_tmp - self.q_table[self.state_prev][self.action_prev]
 
         self.q_table[self.state_prev][self.action_prev]+= self.alpha*d
 
+        #execute action
         self.env.do_action(self.action)
 
     #print Q table values
@@ -100,23 +116,29 @@ class SarsaAgent(lib_agent.agent.Agent):
 
     def main(self):
 
+        #choose epsilon - depends on training or testing mode
         if self.is_run_best_enabled():
             epsilon = self.epsilon_testing
         else:
             epsilon = self.epsilon_training
 
+        #SARSA needs to remember current state + action and previous state + action
         self.state_prev = self.state
         self.state      = self.env.get_observation().argmax()
 
         self.action_prev    = self.action
+        #select action is done by probality selection using epsilon
         self.action         = self.select_action(self.q_table[self.state], epsilon)
 
+        #obtain reward from environment
         reward = self.env.get_reward()
 
+        #process SARSA learning
         d = reward + self.gamma*self.q_table[self.state][self.action] - self.q_table[self.state_prev][self.action_prev]
 
         self.q_table[self.state_prev][self.action_prev]+= self.alpha*d
 
+        #execute action
         self.env.do_action(self.action)
 
     #print Q table values

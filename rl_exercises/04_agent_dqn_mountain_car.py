@@ -1,6 +1,13 @@
+#mountain car problem
+#basic problem where deep Q network can be used
+#network has 2 inputs (position, velocity)
+#8 hidden ReLU neurons
+#3 output neurons
+#mountain car problem is long episodic problem
+#eperience buffer should be huge (4096) and gamma = 1
+
 import lib_env.env_mountain_car
 import lib_agent.agent_dqn
-import lib_agent.agent
 
 #init cliff environment
 env = lib_env.env_mountain_car.EnvMountainCar()

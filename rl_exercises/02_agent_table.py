@@ -1,3 +1,7 @@
+#table agent example
+#learn avoid the cliff
+#try to compare Q-learning and SARSA trajectory results
+
 import lib_env.env_cliff
 import lib_agent.agent_table
 
@@ -8,11 +12,11 @@ env = lib_env.env_cliff.EnvCliff()
 env.print_info()
 
 
-#init sarsa agent
-#agent = lib.agent_table.SarsaAgent(env)
-
 #init Q Learning agent
 agent = lib_agent.agent_table.QLearningAgent(env)
+
+#init sarsa agent
+#agent = lib_agent.agent_table.SarsaAgent(env)
 
 
 #process training

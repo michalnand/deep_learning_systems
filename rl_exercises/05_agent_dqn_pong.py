@@ -1,3 +1,8 @@
+#pong game
+#game is played against hard coded still winning bot
+#reward is -1 when miss, and +1 when hit the ball
+#example for convolutional and deep neural network use
+
 import lib_env.env_pong
 import lib_agent.agent_dqn
 
@@ -9,6 +14,7 @@ env.print_info()
 
 
 #init DQN agent
+#you can choose from pre-saved neteworks a, b, c
 agent = lib_agent.agent_dqn.DQNAgent(env, "networks/pong_network_parameters_c.json")
 
 #process training
