@@ -2,8 +2,8 @@
   "experience_buffer_size"        : 1024,
 
   "gamma"               : 1.0,
-  "epsilon"             : 0.3,
-  "epsilon_best"        : 0.05,
+  "epsilon"             : 0.2,
+  "epsilon_best"        : 0.01,
 
 
   "network_architecture":
