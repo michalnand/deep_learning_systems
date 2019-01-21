@@ -1,11 +1,11 @@
 #this is basic environment test
 #create example environment and agent playing random strategy
 
-import libs_env.env_cliff
+import libs_env.env_settlers
 import libs_agent.agent
 
 #init cliff environment
-env = libs_env.env_cliff.EnvCliff()
+env = libs_env.env_settlers.EnvSettlers()
 
 #print environment info
 env.print_info()
@@ -14,7 +14,7 @@ env.print_info()
 agent = libs_agent.agent.Agent(env)
 
 #simulate training -> random moves only
-training_iterations = 10000
+training_iterations = 10
 
 for iteration in range(0, training_iterations):
     agent.main()
@@ -28,10 +28,9 @@ env.reset_score()
 #choose only the best action -> doesn't matter on this agent
 agent.run_best_enable()
 
-
+retun
 #process testing iterations
-testing_iterations = 1000
-for iteration in range(0, testing_iterations):
+while True:
     #process agent
     agent.main()
 

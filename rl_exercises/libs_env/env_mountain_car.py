@@ -1,5 +1,5 @@
-import lib_env.env
-import lib_gl_gui.gl_gui as gl_gui
+import libs_env.env
+import libs_gl_gui.gl_gui as gl_gui
 
 import numpy
 import time
@@ -7,12 +7,12 @@ import random
 
 
 
-class EnvMountainCar(lib_env.env.Env):
+class EnvMountainCar(libs_env.env.Env):
 
     def __init__(self):
 
         #init parent class -> environment interface
-        lib_env.env.Env.__init__(self)
+        libs_env.env.Env.__init__(self)
 
         #dimensions 1x1x2
         self.width  = 1
@@ -103,7 +103,7 @@ class EnvMountainCar(lib_env.env.Env):
         else:
             acc = 0.0
 
-        velocity = self.velocity + acc*0.001 + numpy.cos(3.0*self.position)*(-0.0025) - 0.002*self.velocity
+        velocity = self.velocity + acc*0.001 + numpy.cos(3.0*self.position)*(-0.0025) - 0.004*self.velocity
         position = self.position + self.velocity
 
         if position < self.position_min:

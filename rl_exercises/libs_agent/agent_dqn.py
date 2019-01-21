@@ -1,4 +1,4 @@
-import lib_agent.agent
+import libs_agent.agent
 import numpy
 
 '''
@@ -10,11 +10,11 @@ import dqn
 import libs_dqn_python.dqn as dqn
 
 #deep Q network agent
-class DQNAgent(lib_agent.agent.Agent):
+class DQNAgent(libs_agent.agent.Agent):
     def __init__(self, env, network_config_file_name):
 
         #init parent class
-        lib_agent.agent.Agent.__init__(self, env)
+        libs_agent.agent.Agent.__init__(self, env)
 
         state_geometry = dqn.sGeometry()
         state_geometry.w = self.env.get_width()

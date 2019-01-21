@@ -1,12 +1,12 @@
-import lib_env.env
+import libs_env.env
 import numpy
 
-class EnvCliff(lib_env.env.Env):
+class EnvCliff(libs_env.env.Env):
 
     def __init__(self):
 
         #init parent class -> environment interface
-        lib_env.env.Env.__init__(self)
+        libs_env.env.Env.__init__(self)
 
 
         #dimensions 1x4x8

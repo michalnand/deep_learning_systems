@@ -1,14 +1,14 @@
-import lib_env.env_cliff
-import lib_gl_gui.gl_gui as gl_gui
+import libs_env.env_cliff
+import libs_gl_gui.gl_gui as gl_gui
 import numpy
 import time
 
-class EnvCliffGui(lib_env.env_cliff.EnvCliff):
+class EnvCliffGui(libs_env.env_cliff.EnvCliff):
 
     def __init__(self):
 
         #init parent class -> EnvCliff
-        lib_env.env_cliff.EnvCliff.__init__(self)
+        libs_env.env_cliff.EnvCliff.__init__(self)
 
         self.gui = gl_gui.GLVisualisation()
 

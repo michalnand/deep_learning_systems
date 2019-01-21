@@ -8,15 +8,15 @@
 #epsilon_training - probability of choosing random action during training
 #epsilon_testing  - probability of choosing random action during testing
 
-import lib_agent.agent
+import libs_agent.agent
 import numpy
 
 #basic Q learning reinforcement learning algorithm
-class QLearningAgent(lib_agent.agent.Agent):
+class QLearningAgent(libs_agent.agent.Agent):
     def __init__(self, env):
 
         #init parent class
-        lib_agent.agent.Agent.__init__(self, env)
+        libs_agent.agent.Agent.__init__(self, env)
 
         #init Q learning algorithm parameters
         self.gamma      = 0.9
@@ -81,11 +81,11 @@ class QLearningAgent(lib_agent.agent.Agent):
 
 
 #basic SARSA reinforcement learning algorithm
-class SarsaAgent(lib_agent.agent.Agent):
+class SarsaAgent(libs_agent.agent.Agent):
     def __init__(self, env):
 
         #init parent class
-        lib_agent.agent.Agent.__init__(self, env)
+        libs_agent.agent.Agent.__init__(self, env)
 
         #init sarsa algorithm parameters
         self.gamma      = 0.9

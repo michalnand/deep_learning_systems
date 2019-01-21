@@ -1,9 +1,9 @@
-import lib.env_arkanoid
-import lib.agent_dqn
-import lib.agent
+import libs_env.env_arkanoid
+import libs_agent.agent_dqn
+import libs_agent.agent
 
 #init cliff environment
-env = lib.env_arkanoid.EnvArkanoid()
+env = libs_env.env_arkanoid.EnvArkanoid()
 
 #print environment info
 env.print_info()

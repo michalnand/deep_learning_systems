@@ -1,5 +1,5 @@
-import lib_env.env
-import lib_gl_gui.gl_gui as gl_gui
+import libs_env.env
+import libs_gl_gui.gl_gui as gl_gui
 
 import numpy
 import time
@@ -7,12 +7,12 @@ import random
 
 
 
-class EnvPong(lib_env.env.Env):
+class EnvPong(libs_env.env.Env):
 
     def __init__(self):
 
         #init parent class -> environment interface
-        lib_env.env.Env.__init__(self)
+        libs_env.env.Env.__init__(self)
 
         #dimensions 1x10x10
         self.width  = 20

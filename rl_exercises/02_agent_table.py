@@ -2,21 +2,21 @@
 #learn avoid the cliff
 #try to compare Q-learning and SARSA trajectory results
 
-import lib_env.env_cliff
-import lib_agent.agent_table
+import libs_env.env_cliff
+import libs_agent.agent_table
 
 #init cliff environment
-env = lib_env.env_cliff.EnvCliff()
+env = libs_env.env_cliff.EnvCliff()
 
 #print environment info
 env.print_info()
 
 
 #init Q Learning agent
-agent = lib_agent.agent_table.QLearningAgent(env)
+agent = libs_agent.agent_table.QLearningAgent(env)
 
 #init sarsa agent
-#agent = lib_agent.agent_table.SarsaAgent(env)
+#agent = libs_agent.agent_table.SarsaAgent(env)
 
 
 #process training

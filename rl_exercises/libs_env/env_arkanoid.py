@@ -1,4 +1,4 @@
-import lib_env.env
+import libs_env.env
 import gl_gui.gl_gui as gl_gui
 
 import numpy
@@ -7,12 +7,12 @@ import random
 
 
 
-class EnvArkanoid(lib_env.env.Env):
+class EnvArkanoid(libs_env.env.Env):
 
     def __init__(self):
 
         #init parent class -> environment interface
-        lib_env.env.Env.__init__(self)
+        libs_env.env.Env.__init__(self)
 
         width  = 8
         height = 20
