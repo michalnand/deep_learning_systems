@@ -10,8 +10,8 @@
   {
         "network_log_file_name" : "networks/pong_network.log",
 
-        "input_geometry"     : [32, 32, 1],
-        "output_geometry"    : [1, 1, 2],
+        "input_geometry"     : [9, 10, 1],
+        "output_geometry"    : [1, 1, 6],
 
         "hyperparameters" :
         {
@@ -42,7 +42,6 @@
             {
                 "type"      : "relu"
             },
-
 
             {
                 "type"      : "output"
