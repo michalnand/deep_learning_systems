@@ -11,7 +11,7 @@ import libs_dqn_python.dqn as dqn
 
 #deep Q network agent
 class DQNAgent(libs_agent.agent.Agent):
-    def __init__(self, env, network_config_file_name):
+    def __init__(self, env, network_config_file_name, epsilon_training = 0.2, epsilon_testing = 0.01):
 
         #init parent class
         libs_agent.agent.Agent.__init__(self, env)
@@ -25,8 +25,8 @@ class DQNAgent(libs_agent.agent.Agent):
 
         #init probabilities of choosing random action
         #different for training and testing
-        self.epsilon_training   = 0.2
-        self.epsilon_testing    = 0.01
+        self.epsilon_training   = epsilon_training
+        self.epsilon_testing    = epsilon_testing
 
     def main(self):
 

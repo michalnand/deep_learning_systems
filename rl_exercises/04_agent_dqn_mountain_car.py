@@ -17,7 +17,7 @@ env.print_info()
 
 
 #init DQN agent
-agent = libs_agent.agent_dqn.DQNAgent(env, "networks/mountain_car_network_parameters.json")
+agent = libs_agent.agent_dqn.DQNAgent(env, "networks/mountain_car_network_parameters.json", 0.1, 0.01)
 
 #process training
 training_iterations = 100000

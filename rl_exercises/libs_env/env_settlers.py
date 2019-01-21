@@ -23,6 +23,9 @@ class EnvSettlers(libs_env.env.Env):
 
         self.actions_count  = 6
 
+        self.move_old = 0
+        self.move_to_win = 0
+
         self.reset()
 
         self.gui = gl_gui.GLVisualisation()
@@ -34,8 +37,8 @@ class EnvSettlers(libs_env.env.Env):
         self.resources["wood"]  = 0
         self.resources["brick"] = 0
         self.resources["wool"]  = 0
-        self.resources["ore"]   = 0
         self.resources["rye"]   = 0
+        self.resources["ore"]   = 0
 
         self.items = { }
         self.items["village"]   =   1
@@ -48,9 +51,9 @@ class EnvSettlers(libs_env.env.Env):
         self.costs["pass"]      = [0, 0, 0, 0, 0]
         self.costs["road"]      = [1, 1, 0, 0, 0]
         self.costs["knight"]    = [0, 0, 1, 1, 1]
-        self.costs["village"]   = [1, 1, 1, 0, 1]
-        self.costs["city"]      = [0, 0, 0, 3, 2]
-        self.costs["up city"]   = [0, 0, 3, 1, 0]
+        self.costs["village"]   = [1, 1, 1, 1, 0]
+        self.costs["city"]      = [0, 0, 0, 2, 3]
+        self.costs["up city"]   = [0, 0, 3, 0, 1]
 
 
         for i in range(0, 3):
@@ -59,8 +62,8 @@ class EnvSettlers(libs_env.env.Env):
         self.__update_observation()
 
     def _print(self):
-        print("move=", self.get_move(), "  score=", self.get_score(), "  normalised score=", self.get_normalised_score())
-        self.render()
+        print("move=", self.get_move(), "  score=", self.get_score(), "  normalised score=", self.get_normalised_score(), "moves to win=", self.move_to_win)
+        #self.render()
 
     def render(self):
         self.gui.init("settlers")
@@ -70,7 +73,14 @@ class EnvSettlers(libs_env.env.Env):
         spacing = 0.025
 
         self.gui.push()
+        self.gui.translate(0.0, 0.0, -0.01)
+        self.gui.set_color(1.0, 1.0, 1.0)
+        self.gui.paint_textured_rectangle(3.0, 3.0, 12)
+        self.gui.pop()
+
+        self.gui.push()
         self.gui.translate(-0.8, 0.75, 0.0)
+
 
         self.gui.push()
         self.gui.translate(0.0*(element_size+spacing), 0.0, 0.0)
@@ -102,20 +112,21 @@ class EnvSettlers(libs_env.env.Env):
         self.gui.push()
         self.gui.translate(3.0*(element_size+spacing), 0.0, 0.0)
         self.gui.set_color(1.0, 1.0, 1.0)
+        self.gui.paint_textured_rectangle(element_size, element_size, 11)
+        count = str(self.resources["rye"])
+        self.gui._print(-0.1, -0.3, 0.0, count);
+        self.gui._print(-0.1, 0.3, 0.0, "RYE");
+        self.gui.pop()
+
+        self.gui.push()
+        self.gui.translate(4.0*(element_size+spacing), 0.0, 0.0)
+        self.gui.set_color(1.0, 1.0, 1.0)
         self.gui.paint_textured_rectangle(element_size, element_size, 10)
         count = str(self.resources["ore"])
         self.gui._print(-0.1, -0.3, 0.0, count);
         self.gui._print(-0.1, 0.3, 0.0, "ORE");
         self.gui.pop()
 
-        self.gui.push()
-        self.gui.translate(4.0*(element_size+spacing), 0.0, 0.0)
-        self.gui.set_color(1.0, 1.0, 1.0)
-        self.gui.paint_textured_rectangle(element_size, element_size, 11)
-        count = str(self.resources["rye"])
-        self.gui._print(-0.1, -0.3, 0.0, count);
-        self.gui._print(-0.1, 0.3, 0.0, "RYE");
-        self.gui.pop()
 
         self.gui.pop()
 
@@ -175,8 +186,9 @@ class EnvSettlers(libs_env.env.Env):
         score = self.__compute_score()
 
         count = "SCORE = " + str(score)
-        self.gui._print(-0.1, -0.1, 0.0, count);
-
+        self.gui._print(-1.0, -0.1, 0.0, count);
+        count = "MOVES = " + str(self.move_to_win)
+        self.gui._print(-1.0, -0.2, 0.0, count);
 
         self.gui.finish()
         time.sleep(0.1)
@@ -188,11 +200,14 @@ class EnvSettlers(libs_env.env.Env):
             self.resources[self.__get_card()]+= 1
 
         if self.__compute_score() >= 20:
+            self.move_to_win = self.move - self.move_old
+            self.move_old = self.move
             self.reward = 1.0
             self.set_terminal_state()
             self.reset()
         else:
-            self.reward = -0.015/2
+
+            self.reward = -0.01
             self.set_no_terminal_state()
 
         self.__saturate_resources()
@@ -210,8 +225,9 @@ class EnvSettlers(libs_env.env.Env):
         self.observation[0*self.get_width() + self.resources["wood"]] = 1.0
         self.observation[1*self.get_width() + self.resources["brick"]] = 1.0
         self.observation[2*self.get_width() + self.resources["wool"]] = 1.0
-        self.observation[3*self.get_width() + self.resources["ore"]] = 1.0
-        self.observation[4*self.get_width() + self.resources["rye"]] = 1.0
+        self.observation[3*self.get_width() + self.resources["rye"]] = 1.0
+        self.observation[4*self.get_width() + self.resources["ore"]] = 1.0
+
 
         self.observation[5*self.get_width() + self.items["village"]] = 1.0
         self.observation[6*self.get_width() + self.items["city"]] = 1.0
@@ -258,9 +274,9 @@ class EnvSettlers(libs_env.env.Env):
             result = False
         if self.resources["wool"] < costs[2]:
             result = False
-        if self.resources["ore"] < costs[3]:
+        if self.resources["rye"] < costs[3]:
             result = False
-        if self.resources["rye"] < costs[4]:
+        if self.resources["ore"] < costs[4]:
             result = False
 
         if (action == 1) and (self.items["village"] <= 0):
@@ -276,8 +292,8 @@ class EnvSettlers(libs_env.env.Env):
         self.resources["wood"]-=     costs[0]
         self.resources["brick"]-=    costs[1]
         self.resources["wool"]-=     costs[2]
-        self.resources["ore"]-=      costs[3]
-        self.resources["rye"]-=      costs[4]
+        self.resources["rye"]-=      costs[3]
+        self.resources["ore"]-=      costs[4]
 
         if action == 0:
             self.items["village"]+= 1
@@ -297,6 +313,7 @@ class EnvSettlers(libs_env.env.Env):
 
     def __saturate_resources(self):
         max = self.width - 1
+
         if self.resources["wood"] > max:
             self.resources["wood"] = max
 
@@ -306,11 +323,11 @@ class EnvSettlers(libs_env.env.Env):
         if self.resources["wool"] > max:
             self.resources["wool"] = max
 
-        if self.resources["ore"] > max:
-            self.resources["ore"] = max
-
         if self.resources["rye"] > max:
             self.resources["rye"] = max
+
+        if self.resources["ore"] > max:
+            self.resources["ore"] = max
 
     def __saturate_items(self):
         max = self.width - 1
@@ -340,8 +357,8 @@ class EnvSettlers(libs_env.env.Env):
         elif num == 2:
             result = "wool"
         elif num == 3:
-            result = "ore"
-        else:
             result = "rye"
+        else:
+            result = "ore"
 
         return result

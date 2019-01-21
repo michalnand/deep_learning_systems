@@ -12,16 +12,17 @@ env.print_info()
 
 
 #init DQN agent
-agent = libs_agent.agent_dqn.DQNAgent(env, "networks/settlers_network_parameters.json")
+agent = libs_agent.agent_dqn.DQNAgent(env, "networks/settlers_network_parameters.json", 0.1, 0.05)
 #agent = libs_agent.agent.Agent(env)
 
 #process training
-training_iterations = 1000000
+training_iterations = 100000
 
 for iteration in range(0, training_iterations):
     agent.main()
     #print training progress %, ane score, every 100th iterations
     if iteration%100 == 0:
+        env._print()
         print(iteration*100.0/training_iterations, env.get_score())
 
 #reset score

@@ -15,7 +15,7 @@ env.print_info()
 
 #init DQN agent
 #you can choose from pre-saved neteworks a, b, c
-agent = libs_agent.agent_dqn.DQNAgent(env, "networks/pong_network_parameters_b.json")
+agent = libs_agent.agent_dqn.DQNAgent(env, "networks/pong_network_parameters_b.json", 0.1, 0.01)
 
 #process training
 training_iterations = 100000
