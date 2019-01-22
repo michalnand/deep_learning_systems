@@ -220,11 +220,15 @@ class EnvSettlers(libs_env.env.Env):
 
         if self.__is_legal_action(action):
             #execute action
-            points = self.__execute_action(action)/self.winning_points
+            '''
+            points = self.__execute_action(action)
             if points > 0.0:
-                self.reward = 0.1
+                self.reward = 0.01
             else:
-                self.reward = -0.1
+                self.reward = -0.01
+            '''
+
+            self.reward = self.__execute_action(action)/self.winning_points
 
             #take next random card
             self.resources[self.__get_card()]+= 1
