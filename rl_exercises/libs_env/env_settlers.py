@@ -33,22 +33,26 @@ class EnvSettlers(libs_env.env.Env):
 
     def reset(self):
 
-        self.winning_points = 10.0
+        #points to win game
+        self.winning_points      = 10.0
 
+        #resources initial state
         self.resources = { }
-        self.resources["wood"]  = 0
-        self.resources["brick"] = 0
-        self.resources["wool"]  = 0
-        self.resources["crop"]   = 0
-        self.resources["ore"]   = 0
+        self.resources["wood"]   =  0
+        self.resources["brick"]  =  0
+        self.resources["wool"]   =  0
+        self.resources["crop"]   =  0
+        self.resources["ore"]    =  0
 
+        #initial items - village, road
         self.items = { }
-        self.items["village"]   =   0
-        self.items["city"]      =   1
+        self.items["village"]   =   1
+        self.items["city"]      =   0
         self.items["up city"]   =   0
         self.items["road"]      =   1
         self.items["knight"]    =   0
 
+        #items costs
         self.costs = { }
         self.costs["pass"]      = [0, 0, 0, 0, 0]
         self.costs["village"]   = [1, 1, 1, 1, 0]
@@ -57,6 +61,7 @@ class EnvSettlers(libs_env.env.Env):
         self.costs["road"]      = [1, 1, 0, 0, 0]
         self.costs["knight"]    = [0, 0, 1, 1, 1]
 
+        #random items costs -> TODO test + costs visualisation
         random_costs = False
         if random_costs:
             costs_count = 4
@@ -68,8 +73,10 @@ class EnvSettlers(libs_env.env.Env):
             self.costs["road"]      = self.__random_costs(costs_count)
             self.costs["knight"]    = self.__random_costs(costs_count)
 
+        #points for buildable items
+        #pass -> no item builded
         self.points = { }
-        self.points["pass"]     = -1.0
+        self.points["pass"]     = -0.2
         self.points["village"]  = 1.0
         self.points["city"]     = 2.0
         self.points["up city"]  = 3.0
@@ -83,7 +90,6 @@ class EnvSettlers(libs_env.env.Env):
 
     def _print(self):
         print("move=", self.get_move(), "  score=", self.get_score(), "  normalised score=", self.get_normalised_score(), "  moves to win =", self.moves_to_win)
-        #self.render()
 
     def render(self):
         self.gui.init("settlers")
@@ -218,17 +224,11 @@ class EnvSettlers(libs_env.env.Env):
 
         self.game_moves+= 1
 
+        self.reward = -0.005
+
         if self.__is_legal_action(action):
             #execute action
-            '''
-            points = self.__execute_action(action)
-            if points > 0.0:
-                self.reward = 0.01
-            else:
-                self.reward = -0.01
-            '''
-
-            self.reward = self.__execute_action(action)/self.winning_points
+            self.reward+= self.__execute_action(action)/self.winning_points
 
             #take next random card
             self.resources[self.__get_card()]+= 1
