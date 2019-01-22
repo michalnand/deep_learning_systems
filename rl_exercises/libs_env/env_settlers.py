@@ -33,6 +33,8 @@ class EnvSettlers(libs_env.env.Env):
 
     def reset(self):
 
+        self.winning_points = 10.0
+
         self.resources = { }
         self.resources["wood"]  = 0
         self.resources["brick"] = 0
@@ -41,27 +43,38 @@ class EnvSettlers(libs_env.env.Env):
         self.resources["ore"]   = 0
 
         self.items = { }
-        self.items["village"]   =   1
-        self.items["city"]      =   0
+        self.items["village"]   =   0
+        self.items["city"]      =   1
         self.items["up city"]   =   0
         self.items["road"]      =   1
         self.items["knight"]    =   0
 
         self.costs = { }
         self.costs["pass"]      = [0, 0, 0, 0, 0]
-        '''
-        self.costs["road"]      = [1, 1, 0, 0, 0]
-        self.costs["knight"]    = [0, 0, 1, 1, 1]
         self.costs["village"]   = [1, 1, 1, 1, 0]
         self.costs["city"]      = [0, 0, 0, 2, 3]
         self.costs["up city"]   = [0, 0, 3, 0, 1]
-        '''
+        self.costs["road"]      = [1, 1, 0, 0, 0]
+        self.costs["knight"]    = [0, 0, 1, 1, 1]
 
-        self.costs["road"]      = [1, 1, 0, 0, 0]
-        self.costs["knight"]    = [0, 0, 1, 1, 1]
-        self.costs["village"]   = [1, 1, 1, 1, 0]
-        self.costs["city"]      = [0, 0, 0, 2, 3]
-        self.costs["up city"]   = [0, 0, 3, 0, 1]
+        random_costs = False
+        if random_costs:
+            costs_count = 4
+            self.costs = { }
+            self.costs["pass"]      = self.__random_costs(costs_count)
+            self.costs["village"]   = self.__random_costs(costs_count)
+            self.costs["city"]      = self.__random_costs(costs_count)
+            self.costs["up city"]   = self.__random_costs(costs_count)
+            self.costs["road"]      = self.__random_costs(costs_count)
+            self.costs["knight"]    = self.__random_costs(costs_count)
+
+        self.points = { }
+        self.points["pass"]     = -1.0
+        self.points["village"]  = 1.0
+        self.points["city"]     = 2.0
+        self.points["up city"]  = 3.0
+        self.points["road"]     = 1.0
+        self.points["knight"]   = 1.0
 
         for i in range(0, 3):
             self.resources[self.__get_card()]+= 1
@@ -203,20 +216,26 @@ class EnvSettlers(libs_env.env.Env):
 
     def do_action(self, action):
 
-        self.reward = 0.0
         self.game_moves+= 1
 
         if self.__is_legal_action(action):
-            #execute action and obtain reward
-            self.reward = self.__execute_action(action)
+            #execute action
+            points = self.__execute_action(action)/self.winning_points
+            if points > 0.0:
+                self.reward = 0.1
+            else:
+                self.reward = -0.1
 
             #take next random card
             self.resources[self.__get_card()]+= 1
         else:
             #negative reward for illegal move
-            self.reward = -0.2
+            self.reward = -1.0
 
-        if self.__compute_score() >= 10:
+        self.__saturate_resources()
+        self.__saturate_items()
+
+        if self.__compute_score() >= self.winning_points:
             k = 0.95
             self.moves_to_win = k*self.moves_to_win + (1.0 - k)*self.game_moves
             self.game_moves = 0.0
@@ -224,10 +243,6 @@ class EnvSettlers(libs_env.env.Env):
             self.reward = 1.0
             self.set_terminal_state()
             self.reset()
-
-
-        self.__saturate_resources()
-        self.__saturate_items()
 
         self.__update_observation()
 
@@ -242,7 +257,7 @@ class EnvSettlers(libs_env.env.Env):
         self.observation[0*self.get_width() + self.resources["wood"]]   = 1.0
         self.observation[1*self.get_width() + self.resources["brick"]]  = 1.0
         self.observation[2*self.get_width() + self.resources["wool"]]   = 1.0
-        self.observation[3*self.get_width() + self.resources["crop"]]    = 1.0
+        self.observation[3*self.get_width() + self.resources["crop"]]   = 1.0
         self.observation[4*self.get_width() + self.resources["ore"]]    = 1.0
 
 
@@ -255,11 +270,11 @@ class EnvSettlers(libs_env.env.Env):
 
     def __compute_score(self):
         result = 0
-        result+= self.items["village"]*1
-        result+= self.items["city"]*2
-        result+= self.items["up city"]*3
-        result+= self.items["road"]*1
-        result+= self.items["knight"]*1
+        result+= self.items["village"]*self.points["village"]
+        result+= self.items["city"]*self.points["city"]
+        result+= self.items["up city"]*self.points["up city"]
+        result+= self.items["road"]*self.points["road"]
+        result+= self.items["knight"]*self.points["knight"]
 
         return result
 
@@ -312,25 +327,29 @@ class EnvSettlers(libs_env.env.Env):
         self.resources["crop"]-=     costs[3]
         self.resources["ore"]-=      costs[4]
 
-        result = 0.1
 
         if action == 0:
             self.items["village"]+= 1
+            points = self.points["village"]
         elif action == 1:
             self.items["village"]-= 1
             self.items["city"]+= 1
+            points = self.points["city"]
         elif action == 2:
             self.items["city"]-= 1
             self.items["up city"]+= 1
+            points = self.points["up city"]
         elif action == 3:
             self.items["road"]+= 1
+            points = self.points["road"]
         elif action == 4:
             self.items["knight"]+= 1
+            points = self.points["knight"]
         else:
-            result = -0.01
+            points = self.points["pass"]
             pass
 
-        return result
+        return points
 
 
     def __saturate_resources(self):
@@ -382,5 +401,14 @@ class EnvSettlers(libs_env.env.Env):
             result = "crop"
         else:
             result = "ore"
+
+        return result
+
+    def __random_costs(self, count):
+        result = [0, 0, 0, 0, 0]
+
+        for i in range(0, count):
+            idx = random.randint(0, 4)
+            result[idx]+= 1
 
         return result
