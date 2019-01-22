@@ -54,5 +54,5 @@ class DQNAgent(libs_agent.agent.Agent):
         else:
             self.deep_q_network.add(state_vector, q_values, self.action, self.reward)
 
-        if self.deep_q_network.is_full():
+        if self.deep_q_network.is_full() and self.is_run_best_enabled() == False:
             self.deep_q_network.learn()
