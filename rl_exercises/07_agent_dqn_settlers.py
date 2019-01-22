@@ -12,7 +12,7 @@ env.print_info()
 
 
 #init DQN agent
-agent = libs_agent.agent_dqn.DQNAgent(env, "networks/settlers_network_parameters.json", 0.1, 0.05)
+agent = libs_agent.agent_dqn.DQNAgent(env, "networks/settlers_network_parameters.json", 0.2, 0.05)
 #agent = libs_agent.agent.Agent(env)
 
 #process training
@@ -33,12 +33,13 @@ agent.run_best_enable()
 
 
 #process testing iterations
-testing_iterations = 2000
-#for iteration in range(0, testing_iterations):
+testing_iterations = 10000
+for iteration in range(0, testing_iterations):
+    agent.main()
+    print("move=", env.get_move(), " score=",env.get_score(), " moves to win=",env.get_moves_to_win())
+
 while True:
     agent.main()
-
-    print("move=", env.get_move(), " score=",env.get_score())
     env.render()
 
 print("program done")
