@@ -56,3 +56,9 @@ class DQNAgent(libs_agent.agent.Agent):
 
         if self.deep_q_network.is_full() and self.is_run_best_enabled() == False:
             self.deep_q_network.learn()
+
+    def save(self, file_name_prefix):
+        self.deep_q_network.save(file_name_prefix)
+
+    def load(self, file_name):
+        self.deep_q_network.load_weights(file_name)

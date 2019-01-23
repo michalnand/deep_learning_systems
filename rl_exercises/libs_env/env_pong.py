@@ -161,12 +161,12 @@ class EnvPong(libs_env.env.Env):
         ball_y = self.__saturate(int(self.ball_y), 0, self.height-1)
 
         player_0 = self.__saturate(int(self.player_0), 0, self.height-1)
-        player_1 = self.__saturate(int(self.player_1), 0, self.height-1)
+        #player_1 = self.__saturate(int(self.player_1), 0, self.height-1)
 
         self.observation.fill(0.0)
         self.observation[ball_y*self.get_width() + ball_x] = 1.0
         self.observation[player_0*self.get_width() + 0] = 1.0
-        self.observation[player_1*self.get_width() + self.get_width()-1] = 1.0
+        #self.observation[player_1*self.get_width() + self.get_width()-1] = 1.0
 
 
     def __saturate(self, value, min, max):

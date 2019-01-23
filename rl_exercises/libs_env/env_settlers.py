@@ -224,17 +224,11 @@ class EnvSettlers(libs_env.env.Env):
 
         self.game_moves+= 1
 
-        self.reward = -0.02
+        self.reward = -0.2 #-0.05
 
         if self.__is_legal_action(action):
             #execute action
             self.reward+= self.__execute_action(action)/self.winning_points
-
-            '''
-            points = self.__execute_action(action)
-            if points > 0.0:
-                self.reward+= 0.01
-            '''
 
             #take next random card
             self.resources[self.__get_card()]+= 1
@@ -361,6 +355,15 @@ class EnvSettlers(libs_env.env.Env):
 
         return points
 
+    def __count_resources(self):
+        result = 0
+        result+= self.resources["wood"]
+        result+= self.resources["brick"]
+        result+= self.resources["wool"]
+        result+= self.resources["crop"]
+        result+= self.resources["ore"]
+
+        return result
 
     def __saturate_resources(self):
         max = self.width - 1
