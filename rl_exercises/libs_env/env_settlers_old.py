@@ -76,7 +76,7 @@ class EnvSettlers(libs_env.env.Env):
         #points for buildable items
         #pass -> no item builded
         self.points = { }
-        self.points["pass"]     = 0.0
+        self.points["pass"]     = -0.2
         self.points["village"]  = 1.0
         self.points["city"]     = 2.0
         self.points["up city"]  = 3.0
@@ -224,33 +224,27 @@ class EnvSettlers(libs_env.env.Env):
 
         self.game_moves+= 1
 
-        self.reward = -0.02
+        self.reward = -0.005
 
         if self.__is_legal_action(action):
             #execute action
             self.reward+= self.__execute_action(action)/self.winning_points
 
-            '''
-            points = self.__execute_action(action)
-            if points > 0.0:
-                self.reward+= 0.01
-            '''
-
             #take next random card
             self.resources[self.__get_card()]+= 1
         else:
+            #negative reward for illegal move
             self.reward = -1.0
 
         self.__saturate_resources()
         self.__saturate_items()
 
         if self.__compute_score() >= self.winning_points:
-            self.reward = 1.0
-
-            k = 0.99
+            k = 0.95
             self.moves_to_win = k*self.moves_to_win + (1.0 - k)*self.game_moves
             self.game_moves = 0.0
 
+            self.reward = 1.0
             self.set_terminal_state()
             self.reset()
 

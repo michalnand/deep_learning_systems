@@ -14,7 +14,7 @@ agent = libs_agent.agent_dqn.DQNAgent(env, "networks/settlers_network_parameters
 #agent = libs_agent.agent.Agent(env)
 
 #process training
-training_iterations = 100000
+training_iterations = 500000
 
 for iteration in range(0, training_iterations):
     agent.main()
