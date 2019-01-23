@@ -10,7 +10,7 @@ env.print_info()
 
 
 #init DQN agent
-agent = libs_agent.agent_dqn.DQNAgent(env, "networks/settlers_network_parameters.json", 0.2, 0.1) #0.3, 0.05
+agent = libs_agent.agent_dqn.DQNAgent(env, "networks/settlers_network_parameters.json", 0.2, 0.1) #0.2, 0.1
 #agent = libs_agent.agent.Agent(env)
 
 #process training
