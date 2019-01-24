@@ -25,6 +25,8 @@ for iteration in range(0, training_iterations):
 
 agent.save("networks/settlers_network/trained/")
 
+#agent.load("networks/settlers_network/trained/")
+
 #reset score
 env.reset_score()
 

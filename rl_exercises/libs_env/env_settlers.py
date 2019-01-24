@@ -77,8 +77,8 @@ class EnvSettlers(libs_env.env.Env):
         #pass -> no item builded
         self.points = { }
         self.points["pass"]     = 0.0
-        self.points["village"]  = 2.0
-        self.points["city"]     = 3.0
+        self.points["village"]  = 1.0
+        self.points["city"]     = 2.0
         self.points["up city"]  = 3.0
         self.points["road"]     = 1.0
         self.points["knight"]   = 1.0
@@ -232,6 +232,13 @@ class EnvSettlers(libs_env.env.Env):
 
             #take next random card
             self.resources[self.__get_card()]+= 1
+            '''
+            for i in range(0, self.items["city"]):
+                self.resources[self.__get_card()]+= 1
+
+            for i in range(0, self.items["up city"]):
+                self.resources[self.__get_card()]+= 2
+            '''
         else:
             self.reward = -1.0
 
@@ -355,18 +362,9 @@ class EnvSettlers(libs_env.env.Env):
 
         return points
 
-    def __count_resources(self):
-        result = 0
-        result+= self.resources["wood"]
-        result+= self.resources["brick"]
-        result+= self.resources["wool"]
-        result+= self.resources["crop"]
-        result+= self.resources["ore"]
-
-        return result
-
     def __saturate_resources(self):
         max = self.width - 1
+        min = 0
 
         if self.resources["wood"] > max:
             self.resources["wood"] = max
@@ -382,6 +380,8 @@ class EnvSettlers(libs_env.env.Env):
 
         if self.resources["ore"] > max:
             self.resources["ore"] = max
+
+
 
     def __saturate_items(self):
         max = self.width - 1
