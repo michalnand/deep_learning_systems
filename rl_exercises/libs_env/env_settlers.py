@@ -77,8 +77,8 @@ class EnvSettlers(libs_env.env.Env):
         #pass -> no item builded
         self.points = { }
         self.points["pass"]     = 0.0
-        self.points["village"]  = 1.0
-        self.points["city"]     = 2.0
+        self.points["village"]  = 2.0
+        self.points["city"]     = 3.0
         self.points["up city"]  = 3.0
         self.points["road"]     = 1.0
         self.points["knight"]   = 1.0
